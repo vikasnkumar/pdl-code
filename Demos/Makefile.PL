@@ -1,6 +1,4 @@
-
-require 'Core/Dev.pm'; PDL::Core::Dev->import();
-
+use PDL::Core::Dev;
 use ExtUtils::MakeMaker;
 # # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # # the contents of the Makefile that is written.
@@ -11,7 +9,7 @@ use ExtUtils::MakeMaker;
 #
 WriteMakefile(
      'NAME'	=> 'PDL::Demos',
-     'VERSION_FROM' => '../Basic/Core/Version.pm',
+     'VERSION_FROM' => '../lib/PDL/Version.pm',
      'PM'       => {'General.pm'     => '$(INST_LIBDIR)/Demos/General.pm',
                     'Screen.pm'    => '$(INST_LIBDIR)/Demos/Screen.pm',
                     'TriD1.pm'    => '$(INST_LIBDIR)/Demos/TriD1.pm',

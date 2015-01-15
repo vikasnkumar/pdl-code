@@ -24,6 +24,6 @@ if ($build==0) {
 
 WriteMakefile(
 	      NAME => "PDL::Interpolate::Slatec",
-	      VERSION_FROM => "../../../Basic/Core/Version.pm",
+	      VERSION_FROM => "../../../lib/PDL/Version.pm",
 );
 

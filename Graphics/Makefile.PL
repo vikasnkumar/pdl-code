@@ -18,7 +18,7 @@ if ( defined($t) and not $t ) {
 
 #WriteMakefile(
 #     'NAME' => 'PDL',
-#     VERSION_FROM => '../Basic/Core/Version.pm',
+#     VERSION_FROM => '../lib/PDL/Version.pm',
 #     DIR => [@subdirs]
 #);
 my @pm_names = qw (Graphics2D.pm State.pm);
@@ -37,7 +37,7 @@ my %man3pods = map { $h = '$(INST_MAN3DIR)/';
 # Write makefile
 WriteMakefile(
                'NAME'         => 'PDL',
-               'VERSION_FROM' => '../Basic/Core/Version.pm',
+               'VERSION_FROM' => '../lib/PDL/Version.pm',
                'PM'           => \%pm,
                'MAN3PODS'     => \%man3pods,
                'DIR'          => [@subdirs],

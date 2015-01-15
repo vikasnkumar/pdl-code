@@ -22,9 +22,9 @@ my $pdl_installed = 1; # uncomment for PDL-internal version
 if (!$pdl_installed) {
   # write dummy makefile if PDL not installed
   WriteMakefile(
-		'NAME'         => 'PDL::Graphics::PLplot',
-		'PREREQ_PM'    => { PDL => 0 },
-		);
+    'NAME'         => 'PDL::Graphics::PLplot',
+    'PREREQ_PM'    => { PDL => 0 },
+  );
   exit;
 }
 

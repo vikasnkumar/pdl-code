@@ -95,8 +95,8 @@ sub whereami_any {
 
 sub whereami {
    for $dir (@INC,qw|. .. ../.. ../../.. ../../../..|) {
-      return ($_[0] ? $dir . '/Basic' : $dir)
-	if -e "$dir/Basic/Core/Dev.pm";
+      return ($_[0] ? $dir . '/lib/PDL' : $dir)
+	if -e "$dir/lib/PDL/Core/Dev.pm";
    }
    die "Unable to determine UNINSTALLED directory path to PDL::Core::Dev module\n"
     if !$_[0];
@@ -126,7 +126,7 @@ unless ( %PDL::Config ) {
     my $dir;
     $dir = whereami(1);
     if ( defined $dir ) {
-	$dir = abs_path($dir . "/Core");
+	$dir = abs_path($dir);
     } else {
 	# as no argument given whereami_inst will die if it fails
         # (and it also returns a slightly different path than whereami(1)
@@ -398,8 +398,9 @@ sub pdlpp_postamble_int {
 	join '',map { my($src,$pref,$mod) = @$_;
 	my $w = whereami_any();
 	$w =~ s%/((PDL)|(Basic))$%%;  # remove the trailing subdir
-	my $core = "$w/Basic/Core";
+	my $core = "$w/../Basic/Core";
 	my $gen = "$w/Basic/Gen";
+	my $libcore = "$w/PDL";
 
 ## I diked out a "$gen/pm_to_blib" dependency (between $core/badsupport.p and
 # $core/Types.pm below), because it appears to be causing excessive recompiles.
@@ -410,7 +411,7 @@ sub pdlpp_postamble_int {
 
 qq|
 
-$pref.pm: $src $core/badsupport.p $core/Types.pm
+$pref.pm: $src $core/badsupport.p $libcore/Types.pm
 	\$(PERL) -I$w/blib/lib -I$w/blib/arch \"-MPDL::PP qw/$mod $mod $pref/\" $src
 
 $pref.xs: $pref.pm
@@ -456,7 +457,7 @@ my $libsarg = $libs || $malloclib ? "$libs $malloclib " : ''; # for Win32
  return (
  	%::PDL_OPTIONS,
 	 'NAME'  	=> $mod,
-	 'VERSION_FROM' => "$w/Basic/Core/Version.pm",
+	 'VERSION_FROM' => "$w/lib/PDL/Version.pm",
 	 'TYPEMAPS'     => [&PDL_TYPEMAP()],
 	 'OBJECT'       => "$pref\$(OBJ_EXT)",
 	 PM 	=> {"$pref.pm" => "\$(INST_LIBDIR)/$pref.pm"},
@@ -464,7 +465,6 @@ my $libsarg = $libs || $malloclib ? "$libs $malloclib " : ''; # for Win32
 	 'INC'          => &PDL_INCLUDE()." $inc $mallocinc",
 	 'LIBS'         => $libsarg ? [$libsarg] : [],
 	 'clean'        => {'FILES'  => "$pref.xs $pref.pm $pref\$(OBJ_EXT) $pref.c"},
-     (eval ($ExtUtils::MakeMaker::VERSION) >= 6.57_02 ? ('NO_MYMETA' => 1) : ()),
  );
 }
 
@@ -482,7 +482,6 @@ sub pdlpp_stdargs {
 	 'LIBS'         => $libs ? ["$libs "] : [],
 	 'clean'        => {'FILES'  => "$pref.xs $pref.pm $pref\$(OBJ_EXT) $pref.c"},
 	 'dist'         => {'PREOP'  => '$(PERL) -I$(INST_ARCHLIB) -I$(INST_LIB) -MPDL::Core::Dev -e pdlpp_genpm $(DISTVNAME)' },
-     (eval ($ExtUtils::MakeMaker::VERSION) >= 6.57_02 ? ('NO_MYMETA' => 1) : ()),
  );
 }
 
@@ -548,51 +547,8 @@ sub unsupported {
 }
 
 sub write_dummy_make {
-  require IO::File;
-    my ($msg) = @_;
-    print STDERR "writing dummy Makefile\n";
-    my $fh = new IO::File "> Makefile" or die "Can't open dummy Makefile: $!";
-
-if($^O !~ /mswin32/i) {
-    print $fh <<"EOT";
-fred:
-	\@echo \"****\"
-	\@echo \"$msg\"
-	\@echo \"****\"
-
-all: fred
-
-test: fred
-
-clean ::
-	-mv Makefile Makefile.old
-
-realclean ::
-	rm -rf Makefile Makefile.old
-
-EOT
-}
-
-else { # It's Win32
-    print $fh <<"EOT";
-fred:
-	\@echo \"****\"
-	\@echo \"$msg\"
-	\@echo \"****\"
-
-all: fred
-
-test: fred
-
-clean ::
-	-ren Makefile Makefile.old <NUL
-
-realclean ::
-	del /F /Q Makefile Makefile.old <NUL
-
-EOT
-}
-   close($fh) or die "Can't close dummy Makefile: $!";
+  require ExtUtils::MakeMaker;
+  ExtUtils::MakeMaker::WriteEmptyMakefile();
 }
 
 sub getcyglib {

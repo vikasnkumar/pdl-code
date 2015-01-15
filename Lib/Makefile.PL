@@ -5,7 +5,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
 	      'NAME' => 'PDL::Lib',
-	      VERSION_FROM => '../Basic/Core/Version.pm',
+	      VERSION_FROM => '../lib/PDL/Version.pm',
 	      DIR =>  [ qw/Opt ImageRGB Fit FFT Filter Image2D ImageND
 			CallExt Slatec GSL GIS Transform Minuit Compression
 			/ ],

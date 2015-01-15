@@ -49,8 +49,7 @@ RCS
 ^Basic/Core/Core\.pm$
 ^Basic/Core/Core\.xs$
 ^Basic/Core/Types\.pm$
-^Basic/Core/Version\.pm
-^Basic/Core/Version\.pm
+^lib/PDL/Version\.pm
 ^Basic/Core/badsupport\.p
 ^Basic/Core/check_endian$
 ^Basic/Core/isbigendian.p$

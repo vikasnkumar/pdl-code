@@ -1,16 +1,13 @@
-
 # Makefile.PL for PDL::Bad module.
 
 # we create a Bad.pm whatever the value of
 # PDL_CONFIG - it's just the contents that will be
 # different...
-#
 use ExtUtils::MakeMaker;
-
-PDL::Core::Dev->import();
+use PDL::Core::Dev;
 
 # bad value support?
-use vars qw( $bvalflag $usenan $bvalPerPdl );
+our ( $bvalflag, $usenan, $bvalPerPdl );
 use File::Spec;
 require File::Spec->catfile( File::Spec->updir, "Core", "badsupport.p" );
 
@@ -33,16 +30,8 @@ print "\n\n";
 
 @pack = (["bad.pd",Bad,PDL::Bad]);
 
-%hash = pdlpp_stdargs_int(@::pack);
-
-#$hash{LIBS} = ['-lm'];
-
-WriteMakefile(%hash);
+WriteMakefile(pdlpp_stdargs_int(@::pack));
 
 # we add ../Core/badsupport.p to the dependencies of Bad.pm
 # - not very elegant
-#
-sub MY::postamble {
-	pdlpp_postamble_int(@::pack);
-}  # Add genpp rule
-
+sub MY::postamble { pdlpp_postamble_int(@::pack); }  # Add genpp rule

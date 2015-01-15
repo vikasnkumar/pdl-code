@@ -1,14 +1,11 @@
-
-# Makefile.PL for PDL::CallExt module
 my $malloclib = $PDL::Config{MALLOCDBG}->{libs};
 my $mallocinc = $PDL::Config{MALLOCDBG}->{include};
 
+use PDL::Core::Dev;
 use ExtUtils::MakeMaker;
 WriteMakefile(
  'NAME'	        => 'PDL::CallExt',
- 'VERSION_FROM' => '../../Basic/Core/Version.pm',
- 'INC' => "-I../../Basic/Core $mallocinc",
+ 'VERSION_FROM' => '../../lib/PDL/Version.pm',
+ 'INC' => PDL_INCLUDE() . " $mallocinc",
  'LIBS' => [$malloclib],
- (eval ($ExtUtils::MakeMaker::VERSION) >= 6.57_02 ? ('NO_MYMETA' => 1) : ()),
 );
-

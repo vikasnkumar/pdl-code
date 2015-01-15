@@ -18,7 +18,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
      'NAME'	=> 'PDL::IO',
-     'VERSION_FROM' => '../Basic/Core/Version.pm',
+     'VERSION_FROM' => '../lib/PDL/Version.pm',
      'PM'       => {
                     'Dumper.pm' => '$(INST_LIB)/PDL/IO/Dumper.pm',
                     'IO.pod' => '$(INST_LIB)/PDL/IO.pod',

@@ -72,7 +72,7 @@ Changes
 # These can either be in the specific directories or specified
 # with full patch in the top level directory (as here).
 
-
+_eumm
 .inlinepdlpp
 Basic/Bad/Bad.c
 Basic/Bad/Bad.pm
@@ -80,23 +80,22 @@ Basic/Bad/Bad.xs
 Basic/Complex/Complex.c
 Basic/Complex/Complex.pm
 Basic/Complex/Complex.xs
-Basic/Core/Config.pm
+lib/PDL/Config.pm
 Basic/Core/Core.c
-Basic/Core/Core.pm
+lib/PDL/Core.pm
 Basic/Core/Core.xs
-Basic/Core/Types.pm
-Basic/Core/Version.pm
+lib/PDL/Types.pm
+lib/PDL/Version.pm
 Basic/Core/badsupport.p
 Basic/Core/mymalloc.p
-Basic/Core/pdl.h
+lib/PDL/Core/pdl.h
 Basic/Core/pdlconv.c
 Basic/Core/pdlcore.c
-Basic/Core/pdlcore.h
+lib/PDL/Core/pdlcore.h
 Basic/Core/pdlsections.c
-Basic/Core/pdlsimple.h
-Basic/Gen/PP/Dump.pm
-Basic/Gen/pptemplate
-Basic/Gen/pptemplate.pod
+lib/PDL/Core/pdlsimple.h
+lib/PDL/PP/Dump.pm
+bin/pptemplate
 Basic/Math/Math.c
 Basic/Math/Math.pm
 Basic/Math/Math.xs
@@ -121,7 +120,7 @@ Basic/Ufunc/Ufunc.pm
 Basic/Ufunc/Ufunc.xs
 Demos/BAD2_demo.pm
 Demos/BAD_demo.pm
-Doc/Doc/Config.pm
+lib/PDL/Doc/Config.pm
 Graphics/IIS/IIS.c
 Graphics/IIS/IIS.pm
 Graphics/IIS/IIS.xs
