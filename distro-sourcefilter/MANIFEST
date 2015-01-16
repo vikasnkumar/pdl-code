@@ -1,0 +1,12 @@
+Changes
+example
+INSTALL
+lib/PDL/NiceSlice.pm
+lib/PDL/NiceSlice/FilterSimple.pm
+lib/PDL/NiceSlice/FilterUtilCall.pm
+lib/PDL/NiceSlice/ModuleCompile.pm
+local.perldlrc
+Makefile.PL
+MANIFEST
+README
+README.head
