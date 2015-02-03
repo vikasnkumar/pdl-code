@@ -1,8 +1,8 @@
 package PDL::Bad;
 use strict;
 use warnings;
-use Inline Pdlpp => Config => clean_after_build => 0;
-use Inline Pdlpp => 'DATA', name => __PACKAGE__;
+use PDL::Bad::Inline Pdlpp => Config => clean_after_build => 0;
+use PDL::Bad::Inline Pdlpp => 'DATA';
 use parent 'PDL::Exporter';
 
 use PDL::Config;

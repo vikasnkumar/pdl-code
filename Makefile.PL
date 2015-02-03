@@ -530,9 +530,10 @@ my %makefile_hash = (
 
   postamble => {
     inline => {
-      module => [ qw(PDL::Ops) ],
+      module => [ qw(PDL::Ops PDL::Bad) ],
       ilsm => 'Inline::Pdlpp',
       bundle => 0,
+      makestub => 1,
     },
   },
 );
